@@ -4,7 +4,9 @@
 #include "Core/window.h"
 
 typedef struct {
-	void (*create)(void);
+	CB_Window_t *window;
+	
+	void (*create)(CB_Window_t *window);
 	void (*destroy)(void);
 
 	void (*eventHandler)(CB_Window_t *window);
@@ -13,7 +15,9 @@ typedef struct {
 } CB_Game_t;
 
 typedef struct {
-	void (*create)(void);
+	CB_Window_t *window;
+
+	void (*create)(CB_Window_t *window);
 	void (*destroy)(void);
 
 	void (*eventHandler)(CB_Window_t *window);
@@ -24,10 +28,10 @@ typedef struct {
 CB_Game_t *CB_CreateGameState(CB_GameOptions_t options);
 void CB_DestroyGameState(CB_Game_t *game);
 
-void CB_GameEventHandler(CB_Game_t *game, CB_Window_t *window);
-void CB_GameUpdate(CB_Game_t *game, CB_Window_t *window);
-void CB_GameRender(CB_Game_t *game, CB_Window_t *window);
+void CB_GameEventHandler(CB_Game_t *game);
+void CB_GameUpdate(CB_Game_t *game);
+void CB_GameRender(CB_Game_t *game);
 
-void CB_GameRun(CB_Game_t *game, CB_Window_t *window);
+void CB_GameRun(CB_Game_t *game);
 
 #endif /* _GAME_H_ */

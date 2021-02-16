@@ -1,13 +1,6 @@
 #include <stdio.h>
 #include "System/game.h"
 
-void create(void);
-void destroy(void);
-
-void eventHandler(CB_Window_t *window);
-void update(CB_Window_t *window);
-void render(CB_Window_t *window);
-
 int main(int argc, char *argv[])
 {
 	CB_WindowOptions_t windowOptions = {
@@ -21,29 +14,24 @@ int main(int argc, char *argv[])
 		.width = 800, .height = 600,
 	};
 
-	CB_GameOptions_t gameOptions = {
-		.create = create,
-		.destroy = destroy,
+	CB_Window_t *window = CB_CreateWindow(windowOptions);	
+	if (window == NULL)
+		exit(EXIT_FAILURE);
 
-		.eventHandler = eventHandler,
-		.update = update,
-		.render = render,	
+	CB_GameOptions_t gameOptions = {
+		.window = window,
 	};
 
-	CB_Window_t *window = CB_CreateWindow(windowOptions);	
 	CB_Game_t *game = CB_CreateGameState(gameOptions);
+	if (game == NULL) {
+		CB_DestroyWindow(window);
+		exit(EXIT_FAILURE);
+	}
 
-	CB_GameRun(game, window);
+	CB_GameRun(game);
 
 	CB_DestroyGameState(game);
 	CB_DestroyWindow(window);
 
 	return 0;
 }
-
-void create(void) {}
-void destroy(void) {}
-
-void eventHandler(CB_Window_t *window) {}
-void update(CB_Window_t *window) {}
-void render(CB_Window_t *window) {}
