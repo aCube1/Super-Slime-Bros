@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "System/game.h"
+#include "game.h"
 
 int main(int argc, char *argv[])
 {
@@ -18,19 +18,15 @@ int main(int argc, char *argv[])
 	if (window == NULL)
 		exit(EXIT_FAILURE);
 
-	CB_GameOptions_t gameOptions = {
-		.window = window,
-	};
-
-	CB_Game_t *game = CB_CreateGameState(gameOptions);
+	CB_Game_t *game = CB_CreateGame(window);
 	if (game == NULL) {
 		CB_DestroyWindow(window);
 		exit(EXIT_FAILURE);
 	}
 
-	CB_GameRun(game);
+	CB_RunState(game->state);
 
-	CB_DestroyGameState(game);
+	CB_DestroyGame(game);
 	CB_DestroyWindow(window);
 
 	return 0;

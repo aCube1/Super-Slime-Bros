@@ -1,5 +1,5 @@
-#ifndef _GAME_H_
-#define _GAME_H_
+#ifndef _STATE_H_
+#define _STATE_H_
 
 #include "Core/window.h"
 
@@ -12,7 +12,7 @@ typedef struct {
 	void (*eventHandler)(CB_Window_t *window);
 	void (*update)(CB_Window_t *window);
 	void (*render)(CB_Window_t *window);
-} CB_Game_t;
+} CB_State_t;
 
 typedef struct {
 	CB_Window_t *window;
@@ -23,15 +23,10 @@ typedef struct {
 	void (*eventHandler)(CB_Window_t *window);
 	void (*update)(CB_Window_t *window);
 	void (*render)(CB_Window_t *window);
-} CB_GameOptions_t;
+} CB_StateOptions_t;
 
-CB_Game_t *CB_CreateGameState(CB_GameOptions_t options);
-void CB_DestroyGameState(CB_Game_t *game);
+CB_State_t *CB_CreateState(CB_StateOptions_t options);
+void CB_DestroyState(CB_State_t *state);
+void CB_RunState(CB_State_t *state);
 
-void CB_GameEventHandler(CB_Game_t *game);
-void CB_GameUpdate(CB_Game_t *game);
-void CB_GameRender(CB_Game_t *game);
-
-void CB_GameRun(CB_Game_t *game);
-
-#endif /* _GAME_H_ */
+#endif /* _STATE_H_ */
