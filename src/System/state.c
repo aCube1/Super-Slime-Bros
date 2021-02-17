@@ -1,6 +1,6 @@
-#include "System/input.h"
 #include "Core/log.h"
 #include "System/state.h"
+#include "Graphics/sprite.h"
 
 static void CB_StateEventHandler(CB_State_t *state);
 static void CB_StateUpdate(CB_State_t *state);
@@ -28,12 +28,7 @@ CB_State_t *CB_CreateState(CB_StateOptions_t options)
 
 	state->create = options.create ? options.create : NULL;
 	if (state->create != NULL)
-		if (!state->create(state->window)) {
-			CB_LogError("Create CallBack Returned \"false\", The State Cannot Be Created");
-
-			CB_DestroyState(state);
-			return NULL;
-		}
+		state->create(state->window);
 
 	state->destroy = options.destroy ? options.destroy : NULL;
 
@@ -80,10 +75,10 @@ static void CB_StateEventHandler(CB_State_t *state)
 				state->window->isOpen = false;
 				break;
 			default:
-				CB_CheckKeyboard(&state->window->event.key);
 				if (state->eventHandler != NULL)
 					state->eventHandler(state->window);
 				
+				CB_CheckKeyboard(state->window, &state->window->event.key);
 				break;
 		}
 	}

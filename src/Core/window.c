@@ -47,6 +47,9 @@ CB_Window_t *CB_CreateWindow(CB_WindowOptions_t options)
 	}
 	CB_LogInfo("Window Renderer Created");
 
+	for (int i = 0; i < 322; i++) 
+		window->keys[i] = false;
+
 	window->maxFPS = options.FPS ? options.FPS : 30.f;
 	window->isOpen = true;
 
@@ -73,4 +76,18 @@ void CB_DestroyWindow(CB_Window_t *window)
 
 	SDL_Quit();
 	CB_LogInfo("SDL2 Quitted");
+}
+
+void CB_CheckKeyboard(CB_Window_t *window, SDL_KeyboardEvent *keyboardEvent)
+{
+	switch (keyboardEvent->type) {
+		case SDL_KEYDOWN:
+			break;
+			window->keys[keyboardEvent->keysym.sym] = true;
+		case SDL_KEYUP:
+			window->keys[keyboardEvent->keysym.sym] = false;
+			break;
+		default:
+			break;
+	}
 }

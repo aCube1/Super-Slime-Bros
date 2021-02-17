@@ -6,7 +6,7 @@
 typedef struct {
 	CB_Window_t *window;
 	
-	bool (*create)(CB_Window_t *window);
+	void (*create)(CB_Window_t *window);
 	void (*destroy)(void);
 
 	void (*eventHandler)(CB_Window_t *window);
@@ -17,7 +17,7 @@ typedef struct {
 typedef struct {
 	CB_Window_t *window;
 
-	bool (*create)(CB_Window_t *window);
+	void (*create)(CB_Window_t *window);
 	void (*destroy)(void);
 
 	void (*eventHandler)(CB_Window_t *window);
