@@ -9,7 +9,7 @@ typedef struct {
 	SDL_Renderer *renderer;
 	SDL_Event event;
 
-	bool isOpen, keys[322];
+	bool isOpen;
 
 	float maxFPS, lastTime, currentTime;
 	double deltaTime;	
@@ -27,7 +27,5 @@ typedef struct {
 
 CB_Window_t *CB_CreateWindow(CB_WindowOptions_t options);
 void CB_DestroyWindow(CB_Window_t *window);
-
-void CB_CheckKeyboard(CB_Window_t *window, SDL_KeyboardEvent *keyboardEvent);
 
 #endif /* _WINDOW_H_ */
