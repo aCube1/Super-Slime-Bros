@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
 		.title = "Super Slime Bros",
 
 		.windowFlags = SDL_WINDOW_OPENGL,
-		.rendererFlags = SDL_RENDERER_ACCELERATED,
+		.rendererFlags = SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_TARGETTEXTURE,
 
 		.FPS = 60.f,
 

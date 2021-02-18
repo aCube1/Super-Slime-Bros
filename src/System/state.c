@@ -65,10 +65,12 @@ void CB_RunState(CB_State_t *state)
 		CB_StateUpdate(state);
 		CB_StateRender(state);
 
-		state->window->currentTime = SDL_GetTicks() - state->window->lastTime;
-		if (1000.f / state->window->maxFPS > state->window->currentTime) {
-			SDL_Delay((1000.f / state->window->maxFPS) - state->window->currentTime);
-		}
+		/* 
+		 * state->window->currentTime = SDL_GetTicks() - state->window->lastTime;
+		 * if (1000.f / state->window->maxFPS > state->window->currentTime) {
+		 *	SDL_Delay((1000.f / state->window->maxFPS) - state->window->currentTime);
+		 * } 
+		 */
 	}
 }
 
